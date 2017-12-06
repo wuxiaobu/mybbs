@@ -19,11 +19,11 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ route('topics.index') }}">话题</a></li>
-                <li><a href="{{ route('categories.show', 1) }}">分享</a></li>
-                <li><a href="{{ route('categories.show', 2) }}">教程</a></li>
-                <li><a href="{{ route('categories.show', 3) }}">问答</a></li>
-                <li><a href="{{ route('categories.show', 4) }}">公告</a></li>
+                <li class="{{(Request::is('topics'))?'active':''}}"><a href="{{ route('topics.index') }}">话题</a></li>
+                <li class="{{(Request::is('categories/1'))?'active':''}}"><a href="{{ route('categories.show', 1) }}">分享</a></li>
+                <li class="{{(Request::is('categories/2'))?'active':''}}"><a href="{{ route('categories.show', 2) }}">教程</a></li>
+                <li class="{{(Request::is('categories/3'))?'active':''}}"><a href="{{ route('categories.show', 3) }}">问答</a></li>
+                <li class="{{(Request::is('categories/4'))?'active':''}}"><a href="{{ route('categories.show', 4) }}">公告</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
