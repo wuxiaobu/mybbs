@@ -58,22 +58,43 @@
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('summernote-editor/summernote.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('summernote-editor/summernote.css') }}">
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('summernote-editor/summernote.min.js') }}"></script>
-    <script src="{{ asset('summernote-editor/lang/summernote-zh-CN.js') }}"></script>
-    <script>
+<script src="{{ asset('summernote-editor/summernote.min.js') }}"></script>
+<script src="{{ asset('summernote-editor/lang/summernote-zh-CN.js') }}"></script>
+<script>
     $(document).ready(function() {
        $('#editor').summernote({
             height: 300,
             minHeight: null,
             maxHeight: null,
             focus: true,
-            lang: 'zh-CN'
+            lang: 'zh-CN',
+            callbacks: {
+                onImageUpload: function(files) { //the onImageUpload API
+                    img = sendFile(files[0]);
+                }
+            }
        });
     });
-    </script>
+    function sendFile(file) {
+        data = new FormData();
+        data.append("file", file);
+        console.log(data);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: "{{ route('topics.upload_image') }}",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(url) {
+                $("#editor").summernote('insertImage', url, 'image name'); // the insertImage API
+            }
+        });
+    }
+</script>
 
 @endsection

@@ -7,6 +7,11 @@
 
 require('./bootstrap');
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 window.Vue = require('vue');
 
 /**
@@ -20,3 +25,5 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+

@@ -979,6 +979,11 @@ module.exports = __webpack_require__(42);
 
 __webpack_require__(11);
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 window.Vue = __webpack_require__(35);
 
 /**
@@ -990,7 +995,7 @@ window.Vue = __webpack_require__(35);
 Vue.component('example', __webpack_require__(38));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
 });
 
 /***/ }),

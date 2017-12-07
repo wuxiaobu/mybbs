@@ -7,6 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'MyBBS')</title>
+    <meta name="description" content="@yield('description', 'MyBBS 爱好者社区')" />
     <!-- Styles -->
     <link rel="shortcut icon" href="{{ asset('images/icon.png') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
