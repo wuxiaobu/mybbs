@@ -38,9 +38,11 @@
                     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                     {{ $topic->reply_count }}
                 </div>
-
+                <div class="topic-body-parent">
                 <div class="topic-body">
                     {!! $topic->body !!}
+                </div>
+                <a href="javascript:void(0);" class="read-more"><span>Read More <i class="fa fa-caret-down"></i></span></a>
                 </div>
                 @can('update',$topic)
                     <div class="operate">
@@ -57,4 +59,71 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('styles')
+<style type="text/css">
+#myAffix{
+    z-index: 30;
+}
+#myAffix.affix{
+    top: 0;
+}
+#myAffix.affix-bottom{
+    border-top: 3px solid #eee;
+    position: fixed;
+}
+.topic-body-parent{
+    max-height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+.topic-body-parent.expanded{
+    max-height: none;
+}
+.topic-body-parent.expanded .read-more{
+    display: none;
+}
+.topic-body-parent .read-more{
+    text-align: center;
+    display: block;
+    height: 80px;
+    margin-top: -80px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-decoration: none;
+
+   background-image: -webkit-linear-gradient(top, rgba(255,255,255,0) 0, rgba(255,255,255,1) 100%);
+  background-image: -o-linear-gradient(top, rgba(255,255,255,0) 0, rgba(255,255,255,1) 100%);
+  background-image: -webkit-gradient(linear, center top, center bottom, color-stop(0, rgba(255,255,255,0)), to(rgba(255,255,255,1)));
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0) 0, rgba(255,255,255,1) 100%);
+}
+.topic-body-parent .read-more span{
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 600;
+    text-shadow: 0 0 2px #888;
+    position: absolute;
+    bottom:0;
+    left: 50%;
+
+    -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+</style>
+
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    if($('.topic-body-parent').height() >= $('.topic-body-parent > .description-container').height()){
+        $('.topic-body-parent .read-more').remove();
+    }
+
+    $('.topic-body-parent .read-more').on('click', function(){
+        $(this).parents('.topic-body-parent').addClass("expanded");
+    });
+</script>
 @endsection

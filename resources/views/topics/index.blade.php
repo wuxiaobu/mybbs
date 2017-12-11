@@ -34,4 +34,38 @@
     </div>
 </div>
 
+
 @endsection
+@section('styles')
+<style type="text/css">
+#myAffix{
+    z-index: 30;
+}
+#myAffix.affix{
+    top: 0;
+}
+#myAffix.affix-bottom{
+    border-top: 3px solid #eee;
+    position: fixed;
+}
+</style>
+
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    console.log($('#myAffix').offset());
+    var tops = $('#myAffix').offset().top //+ $('#myAffix').outerHeight();
+    $('#myAffix').width($('#myAffix').width())
+    .affix({
+        offset: {
+            top: function () {
+                return tops;
+            },
+            bottom: function () {
+                return 0;
+            }
+        }
+    })
+</script>
+@endsection
+
