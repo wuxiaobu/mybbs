@@ -39,10 +39,18 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#">Ta 的话题</a></li>
-                    <li><a href="#">Ta 的回复</a></li>
+                    <li class="{{(active(Request::getRequestUri()) == '')?'active':''}}">
+                        <a href="{{ route('users.show', $user->id) }}">Ta 的话题</a>
+                    </li>
+                    <li class="{{(active(Request::getRequestUri()) == 'replies')?'active':''}}">
+                        <a href="{{ route('users.show', [$user->id, 'tab' => 'replies']) }}">Ta 的回复</a>
+                    </li>
                 </ul>
-                @include('user._topics', ['topics' => $user->topics()->recent()->paginate(5)])
+                @if ((active(Request::getRequestUri()) == 'replies'))
+                    @include('user._replies', ['replies' => $user->replies()->with('topic')->recent()->paginate(5)])
+                @else
+                    @include('user._topics', ['topics' => $user->topics()->recent()->paginate(5)])
+                @endif
             </div>
         </div>
 

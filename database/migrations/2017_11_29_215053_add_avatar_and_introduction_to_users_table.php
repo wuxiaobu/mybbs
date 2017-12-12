@@ -16,6 +16,8 @@ class AddAvatarAndIntroductionToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('avatar')->nullable();
             $table->string('introduction')->nullable();
+            $table->string('activation_token',30)->default('');
+            $table->tinyInteger('status',1)->default(0);
         });
     }
 
@@ -29,6 +31,7 @@ class AddAvatarAndIntroductionToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('avatar');
             $table->dropColumn('introduction');
+            $table->dropColumn('activation_token');
         });
     }
 }

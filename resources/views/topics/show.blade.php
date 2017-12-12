@@ -42,7 +42,7 @@
                 <div class="topic-body">
                     {!! $topic->body !!}
                 </div>
-                <a href="javascript:void(0);" class="read-more"><span>Read More <i class="fa fa-caret-down"></i></span></a>
+                <a href="javascript:void(0);" class="read-more"><span>阅读全文<i class="fa fa-caret-down"></i></span></a>
                 </div>
                 @can('update',$topic)
                     <div class="operate">

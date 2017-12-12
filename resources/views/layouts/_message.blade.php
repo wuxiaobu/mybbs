@@ -18,3 +18,10 @@
         {{ Session::get('danger') }}
     </div>
 @endif
+
+@if (Session::has('warning'))
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        {{ Session::get('warning') }}
+    </div>
+@endif
