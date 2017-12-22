@@ -7,10 +7,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Mail;
+use Auth;
 
 class User extends Authenticatable implements CanResetPasswordContract
 {
-    use Notifiable;
+    use Notifiable {
+        notify as protected laravelNotify;
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -53,5 +56,27 @@ class User extends Authenticatable implements CanResetPasswordContract
             ->to($to)
             ->subject($subject);
         });*/
+    }
+
+    public function notify($instance)
+    {
+        // 如果要通知的人是当前用户，就不必通知了！
+        if ($this->id == Auth::id()) {
+            return;
+        }
+        $this->increment('notification_count');
+        $this->laravelNotify($instance);
+    }
+
+    public function markAsRead()
+    {
+        $this->notification_count = 0;
+        $this->save();
+        $this->unreadNotifications->markAsRead();
+    }
+
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
     }
 }
