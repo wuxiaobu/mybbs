@@ -15,7 +15,7 @@ class RepliesController extends Controller
     }
 
     public function store(Request $request, Reply $reply)
-    {   
+    {
         $this->validate($request, [
             'content' => 'required|min:5',
         ]);
@@ -25,5 +25,13 @@ class RepliesController extends Controller
         $reply->save();
 
         return redirect()->to($reply->topic->link())->with('success', '创建成功！');
+    }
+
+    public function destroy(Reply $reply)
+    {
+        $this->authorize('destroy', $reply);
+        $reply->delete();
+
+        return redirect()->to($reply->topic->link())->with('success', '成功删除回复！');
     }
 }
