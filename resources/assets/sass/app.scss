@@ -7,7 +7,7 @@
 /* universal */
 
 body {
-    font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial,sans-serif;
+    font-family: Open Sans, Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial,sans-serif;
 }
 
 /* header */
@@ -19,6 +19,18 @@ body {
     border-top: 4px solid #00b5ad;
     margin-bottom: 40px;
     margin-top: 0px;
+
+    .dropdown-menu {
+        padding: 0px;
+        li a {
+            border-bottom: 1px solid #d8d8d8;
+            line-height: 2.4;
+
+            .glyphicon {
+                margin-right: 8px;
+            }
+        }
+    }
 }
 
 /* Sticky footer styles */
