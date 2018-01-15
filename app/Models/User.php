@@ -8,12 +8,14 @@ use App\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Mail;
 use Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements CanResetPasswordContract
 {
     use Notifiable {
         notify as protected laravelNotify;
     }
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
